@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onResult(userStateDetails: UserStateDetails) {
                     when (userStateDetails.userState) {
                         UserState.SIGNED_IN -> runOnUiThread {
-                            val textView = findViewById(R.id.text) as TextView
+                            val textView = findViewById(R.id.amplifyText) as TextView
                             textView.text = "Logged IN"
                         }
                         UserState.SIGNED_OUT -> runOnUiThread {
-                            val textView = findViewById(R.id.text) as TextView
+                            val textView = findViewById(R.id.amplifyText) as TextView
                             textView.text = "Logged OUT"
                         }
                         else -> AWSMobileClient.getInstance().signOut()
