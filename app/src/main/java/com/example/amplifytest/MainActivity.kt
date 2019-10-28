@@ -11,6 +11,8 @@ import com.amazonaws.mobile.client.UserState
 
 
 
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,18 @@ class MainActivity : AppCompatActivity() {
                         UserState.SIGNED_OUT -> runOnUiThread {
                             val textView = findViewById(R.id.amplifyText) as TextView
                             textView.text = "Logged OUT"
+
+                            // 'this' refers the the current active activity
+                            AWSMobileClient.getInstance()
+                                .showSignIn(this@MainActivity, object : Callback<UserStateDetails> {
+                                    override fun onResult(result: UserStateDetails) {
+                                        Log.d("SIGNIN", "onResult: " + result.userState)
+                                    }
+
+                                    override fun onError(e: Exception) {
+                                        Log.e("SIGNIN", "onError: ", e)
+                                    }
+                                })
                         }
                         else -> AWSMobileClient.getInstance().signOut()
                     }
