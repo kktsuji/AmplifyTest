@@ -54,10 +54,20 @@ class MainActivity : AppCompatActivity() {
             })
 
         // サインアウトボタンの定義
-        val buttonSignout = findViewById(R.id.signoutButton) as Button
-        buttonSignout.setOnClickListener{
+        val signoutButton = findViewById(R.id.signoutButton) as Button
+        signoutButton.setOnClickListener{
             AWSMobileClient.getInstance().signOut()
             Log.e("SIGNOUT", "clickSignoutButton")
+            AWSMobileClient.getInstance()
+                .showSignIn(this@MainActivity, object : Callback<UserStateDetails> {
+                    override fun onResult(result: UserStateDetails) {
+                        Log.d("SIGNIN", "onResult: " + result.userState)
+                    }
+
+                    override fun onError(e: Exception) {
+                        Log.e("SIGNIN", "onError: ", e)
+                    }
+                })
         }
     }
 }
