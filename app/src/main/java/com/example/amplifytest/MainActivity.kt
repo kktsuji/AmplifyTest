@@ -6,6 +6,7 @@ import com.amazonaws.mobile.client.AWSMobileClient
 import android.widget.TextView
 import com.amazonaws.mobile.client.UserStateDetails
 import android.util.Log
+import android.widget.Button
 import com.amazonaws.mobile.client.Callback
 import com.amazonaws.mobile.client.UserState
 
@@ -51,5 +52,12 @@ class MainActivity : AppCompatActivity() {
                     Log.e("INIT", e.toString())
                 }
             })
+
+        // サインアウトボタンの定義
+        val buttonSignout = findViewById(R.id.signoutButton) as Button
+        buttonSignout.setOnClickListener{
+            AWSMobileClient.getInstance().signOut()
+            Log.e("SIGNOUT", "clickSignoutButton")
+        }
     }
 }
