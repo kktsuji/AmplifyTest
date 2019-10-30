@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         val signoutButton = findViewById(R.id.signoutButton) as Button
         signoutButton.setOnClickListener{
             AWSMobileClient.getInstance().signOut()
-            Log.e("SIGNOUT", "clickSignoutButton")
+            Log.d("SIGNOUT", "clickSignoutButton")
             AWSMobileClient.getInstance()
                 .showSignIn(this@MainActivity, object : Callback<UserStateDetails> {
                     override fun onResult(result: UserStateDetails) {
